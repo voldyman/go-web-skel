@@ -10,7 +10,7 @@ var (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	templateFile, err := getTemplate("test.html")
+	templateFile, err := getTemplate("index.html")
 	if err != nil {
 		Error(err.Error(), w, r)
 		return
@@ -21,6 +21,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(err.Error()))
 		return
 	}
-	templ.Execute(w, "Index?")
-	logRequest(r.Method, r.Host, "Index")
+	templ.Execute(w, struct { Name string} {"doodle"})
+	logRequest(r.Method, r.URL, "Index")
 }

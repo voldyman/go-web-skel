@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"net/url"
 )
 
 func fileExists(filename string) bool {
@@ -24,6 +25,6 @@ func getTemplate(name string) (string, error) {
 	return "", errors.New("File doesn't exist")
 }
 
-func logRequest(method, from, handledBy string) {
-	log.Printf("%s Request from: %s  | handler: %s\n", method, from, handledBy)
+func logRequest(method string, from *url.URL, handledBy string) {
+	log.Printf("%s  %s  | handler: %s\n", method, from.Path, handledBy)
 }
